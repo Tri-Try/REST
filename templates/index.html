@@ -1,0 +1,55 @@
+<html>
+  <head>
+    <title>NTHU 開放校園資料API</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <div class="row">
+      <div class="col-md-12 jumbotron">
+        <h1 class="text-center">Open Campus API</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-offset-2 col-md-8">
+        <div class="panel panel-primary">
+          <div class="panel-heading">NTHU Library</div>
+          <div class="panel-body">
+            <p>清華大學圖書館系統上相關資料，提供 json 格式資料。</p>
+            <p class="text-right text-info">提供單位: <a href="https://github.com/Tri-Try">TriTry</a></p>
+          </div>
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>URL</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>失物招領</th>
+                <th><a href="/api/v1/lost">/api/v1/lost</a></th>
+              </tr>
+              <tr>
+                <th>新進圖書資料</th>
+                <th><a href="/api/v1/new">/api/v1/new</a></th>
+              </tr>
+              <tr>
+                <th>考古題</th>
+                <th><a href="/api/v1/questions">/api/v1/questions</a></th>
+              </tr>
+              <tr>
+                <th>空間借閱系統</th>
+                <th><a href="/api/v1/space">/api/v1/space</a></th>
+              </tr>
+              <tr>
+                <th>借閱排行榜</th>
+                <th><a href="/api/v1/top">/api/v1/top</a></th>
+              </tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
