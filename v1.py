@@ -3,6 +3,8 @@ import json
 from flask import Blueprint
 from flask_restful import Resource, Api, abort
 
+from nthu_library import NTHULibrary
+
 api_v1_bp = Blueprint('api_v1', __name__)
 API_VERSION_V1 = 'v1'
 
@@ -21,6 +23,10 @@ library_resources = {
 }
 
 
+def make_job(service_id):
+    return NTHULibrary.get_available_space()
+
+
 def abort_if_doesnt_exist(service_id):
     if service_id not in library_resources:
         abort(404, message="Data {} doesn't exist".format(service_id))
@@ -29,6 +35,8 @@ def abort_if_doesnt_exist(service_id):
 class Library(Resource):
     def get(self, service_id):
         abort_if_doesnt_exist(service_id)
+        if service_id in ['space']:
+            return make_job(service_id)
         return library_resources[service_id]
 
 
