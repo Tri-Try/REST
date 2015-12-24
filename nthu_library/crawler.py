@@ -36,7 +36,7 @@ def crawl_top_circulations(query):
                 rk, title, ref, cnt = row.findChildren()
             except ValueError:
                 # for year 2003, there's no <a> tag
-                rk, title, cnt = row.findChildren()
+                rk, title, cnt, ref = row.findChildren(), None
             books.append({
                 'rank': rk.text,
                 'book_name': title.text.strip(' /'),
