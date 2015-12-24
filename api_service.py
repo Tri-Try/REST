@@ -25,8 +25,8 @@ def setup_database(app):
         db.create_all()
 
 
-if __name__ == '__main__':
-    app = create_app()
-    if not os.path.isfile('sqlite3.db'):
-        setup_database(app)
-    app.run(host='0.0.0.0')
+app = create_app()
+
+if not os.path.isfile('sqlite3.db'):
+    setup_database(app)
+# app.run(host='0.0.0.0')

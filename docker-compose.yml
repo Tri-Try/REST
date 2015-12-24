@@ -5,7 +5,7 @@ web:
     - .:/code/
   expose:
       - "5000:5000"
-  command: gunicorn -w 4 -b :8000 api-service:app
+  command: gunicorn -w 4 -b :8000 api_service:app
 
 nginx:
   restart: always

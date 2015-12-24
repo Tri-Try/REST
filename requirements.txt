@@ -1,5 +1,6 @@
 flask
 flask-restful
+flask-sqlalchemy
 beautifulsoup4==4.4.0
 feedparser==5.2.1
 gevent==1.1b2
