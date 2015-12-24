@@ -5,6 +5,12 @@ from urllib.parse import urljoin
 import nthu_library.static_urls as nthu_library_url
 from nthu_library.tools import get_page, get_pages, build_soup, post_page
 
+from database import db
+from models import Sheet, Department, Examtype, Subject, get_or_create
+
+AFTER_GRADUATE_EXAMS = 'after-graduate-exams'
+TRANSFER_EXAMS = 'transfer-exams'
+
 
 get_cols = lambda row: [e for e in row.children if str(e).strip()]
 
@@ -190,54 +196,64 @@ def crawl_rss(param):
 def crawl_past_year_questions():
     soup = get_page(nthu_library_url.past_year_questions_url)
     table = soup.find_all('div', 'clearfix')
+
     blocks = table[0].find_all('div', '')
-    after_graduate_exams = dict()
+
     for block in blocks[1:]:
         links = block.find_all('a')
         for link in links:
             text = link.text
             link = link.get('href', '')
             url = nthu_library_url.past_year_questions + link
-            target = _crawl_detail(url)
-            after_graduate_exams[text] = target
+            _crawl_detail(text, url)
+
     transferLinks = soup.find('ul', 'list02 clearfix').find_all('a')
-    transfer_exams = dict()
+
     for transferLink in transferLinks:
         text = transferLink.text
         link = transferLink.get('href', '')
         url = nthu_library_url.past_year_questions + link
-        target = _crawl_transfer(url)
-        transfer_exams[text] = target
-    return {'研究所考古題': after_graduate_exams, '轉學考考古題': transfer_exams}
+        year = int(re.findall('\d+', text)[0])
+        _crawl_transfer(year, url)
 
 
-def _crawl_detail(url):
+def _crawl_detail(department_name, url):
+    depart = get_or_create(Department, department_name)
+
     soup = get_page(url)
     years = soup.find('table', 'listview').find_all('tr')
-    department_detail = dict()
+
     for year in years[1:]:
         which_year = year.find_all('td')[0].text
         links = year.find_all('a')
-        yearly_detail = dict()
         for link in links:
             text = link.text
             link = link.get('href', '')
             target = urljoin(url, link)
-            yearly_detail[text] = target
-        department_detail[which_year] = yearly_detail
-    return department_detail
+
+            sub = get_or_create(Subject, text)
+            t = get_or_create(Examtype, AFTER_GRADUATE_EXAMS)
+            sheet = Sheet(target, int(which_year), depart, sub, t)
+            db.session.add(sheet)
+
+    db.session.commit()
 
 
-def _crawl_transfer(url):
+def _crawl_transfer(year, url):
     soup = get_page(url)
     links = soup.find('div', 'clearfix').find_all('a')
-    transfer_detail = dict()
+
     for link in links[1:]:
         text = link.text
         link = link.get('href', '')
         target = urljoin(url, link)
-        transfer_detail[text] = target
-    return transfer_detail
+
+        sub = get_or_create(Subject, text)
+        t = get_or_create(Examtype, TRANSFER_EXAMS)
+        sheet = Sheet(target, year, None, sub, t)
+        db.session.add(sheet)
+
+    db.session.commit()
 
 
 def crawl_available_space():
@@ -250,4 +266,3 @@ def crawl_available_space():
         number = item[1].text
         space[text] = number
     return space
-

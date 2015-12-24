@@ -14,13 +14,13 @@ class NTHULibrary(object):
     def __repr__(self):
         return '%s@library object' % self.user.account
 
-    def get_lost(self,
-                 place='ALL', date_start='2015-02-10',
-                 date_end='2015-08-10', category='ALL',
+    @staticmethod
+    def get_lost(place='ALL', date_start='2015-02-10',
+                 date_end='2015-08-10', catalog='ALL',
                  keyword=''):
         data = {
             'place': place, 'date_start': date_start,
-            'date_end': date_end, 'catalog': category,
+            'date_end': date_end, 'catalog': catalog,
             'keyword': keyword
         }
         return crawl_lost_objects(data)
@@ -70,7 +70,8 @@ class NTHULibrary(object):
     def get_reserve_history(self):
         return self.user.get_reserve_history()
 
-    def get_past_year_questions(self):
+    @staticmethod
+    def get_past_year_questions():
         return crawl_past_year_questions()
 
     @staticmethod

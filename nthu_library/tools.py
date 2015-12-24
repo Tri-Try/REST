@@ -77,4 +77,3 @@ def _get_page(url):
 def get_pages(urls):
     pool = ThreadPool(cpu_count())
     return pool.map(_get_page, urls)
-
