@@ -51,11 +51,15 @@ def crawl_lost_objects(data):
     soup = post_page(nthu_library_url.lost_found_url, data=data)
     lost_items = list()
     for item in build_soup(soup).select('table > tr')[1:]:
+        r = [s.strip()
+             for s in item.select('td:nth-of-type(4)')[0].text.split('\r\n')]
+        sysid = re.search('\d+', r[1])
         lost_items.append({
             'id': item.select('td:nth-of-type(1)')[0].text,
             'time': item.select('td:nth-of-type(2)')[0].text,
             'place': item.select('td:nth-of-type(3)')[0].text,
-            'description': item.select('td:nth-of-type(4)')[0].text,
+            'description': r[0],
+            'system_id': sysid.group() if sysid else None
         })
     return lost_items
 
