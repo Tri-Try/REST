@@ -2,7 +2,7 @@ from flask import Blueprint, request
 from flask_restful import Resource, Api, abort, fields, marshal
 
 from nthu_library import NTHULibrary
-from models import Sheet, Circulation
+from application.models import Sheet, Circulation
 
 api_v1_bp = Blueprint('api_v1', __name__)
 api_v1 = Api(api_v1_bp)

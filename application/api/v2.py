@@ -5,7 +5,7 @@ from flask.ext import restful
 from flask.ext.restful import abort, fields, marshal_with, reqparse
 
 from nthu_library import NTHULibrary
-from models import Sheet, Department, Examtype
+from application.models import Sheet, Department, Examtype
 
 API_VERSION_V2 = 'v2'
 
@@ -23,7 +23,6 @@ resource_fields = {
 
 
 class SheetResource(restful.Resource):
-
 
     @marshal_with(resource_fields, envelope='result')
     def get(self):

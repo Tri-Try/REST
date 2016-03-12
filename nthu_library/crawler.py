@@ -5,8 +5,7 @@ from urllib.parse import urljoin
 import nthu_library.static_urls as nthu_library_url
 from nthu_library.tools import get_page, get_pages, build_soup, post_page
 
-from database import db
-from models import Sheet, Department, Examtype, Subject, Circulation, get_or_create
+from application.models import Sheet, Department, Examtype, Subject, Circulation, get_or_create, db
 
 AFTER_GRADUATE_EXAMS = 'after-graduate-exams'
 TRANSFER_EXAMS = 'transfer-exams'

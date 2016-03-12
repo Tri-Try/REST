@@ -1,4 +1,7 @@
-from database import db
+from flask.ext.sqlalchemy import SQLAlchemy
+
+
+db = SQLAlchemy()
 
 
 def get_or_create(model, val):
