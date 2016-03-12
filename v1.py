@@ -1,47 +1,36 @@
-import json
-
 from flask import Blueprint, request
-from flask_restful import Resource, Api, abort, fields, marshal_with
+from flask_restful import Resource, Api, abort, fields, marshal
 
 from nthu_library import NTHULibrary
-from models import Sheet
+from models import Sheet, Circulation
 
 api_v1_bp = Blueprint('api_v1', __name__)
+api_v1 = Api(api_v1_bp)
 API_VERSION_V1 = 'v1'
 
-api_v1 = Api(api_v1_bp)
 
-library_files = ['top']
-
-
-def init_load(name):
-    with open('%s-library-data.json' % name, encoding='utf8') as f:
-        return json.load(f, encoding='utf8')
-
-library_resources = {
-    name: init_load(name)
-    for name in library_files
-}
-
-
-route_func = {
+route_func, resource_fields, circulation_fields = {
     'space': NTHULibrary.get_available_space,
     'lost': NTHULibrary.get_lost,
     'new': NTHULibrary.get_newest_books,
-}
-
-
-resource_fields = {
+}, {
     'year': fields.Integer,
     'url': fields.String,
     'department': fields.String,
     'subject': fields.String,
     'examtype': fields.String
+}, {
+    'type': fields.String,
+    'bookname': fields.String,
+    'url': fields.String,
+    'tag': fields.String,
+    'year': fields.Integer,
+    'rank': fields.Integer,
+    'count': fields.Integer,
 }
 
 
 def clean_param(params):
-    # TODO
     return params.to_dict()
 
 
@@ -51,14 +40,10 @@ def make_job(service_id, param):
         else route_func[service_id]()
 
 
-@marshal_with(resource_fields, envelope='result')
 def query_from_db(service_id):
-    return Sheet.query.all()
-
-
-def abort_if_doesnt_exist(service_id):
-    if service_id not in library_resources:
-        abort(404, message="Data {} doesn't exist".format(service_id))
+    return marshal(Sheet.query.all(), resource_fields) \
+        if service_id == 'questions' \
+        else marshal(Circulation.query.all(), circulation_fields)
 
 
 class Library(Resource):
@@ -66,10 +51,9 @@ class Library(Resource):
     def get(self, service_id):
         if service_id in ['space', 'lost', 'new']:
             return make_job(service_id, request.args)
-        if service_id in ['questions']:
+        if service_id in ['questions', 'top']:
             return query_from_db(service_id)
-        abort_if_doesnt_exist(service_id)
-        return library_resources[service_id]
+        abort(404, message="Data {} doesn't exist".format(service_id))
 
 
 api_v1.add_resource(Library, '/<string:service_id>')

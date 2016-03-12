@@ -18,5 +18,8 @@ def hello_service():
 
 @page_bp.route("/update_sheets")
 def crawl_sheets_service():
+    lib = NTHULibrary()
     NTHULibrary.get_past_year_questions()
+    lib.get_top_circulated_materials(type='loaned')
+    lib.get_top_circulated_materials(type='reserved')
     return '抓抓抓抓抓完啦'

@@ -6,7 +6,7 @@ import nthu_library.static_urls as nthu_library_url
 from nthu_library.tools import get_page, get_pages, build_soup, post_page
 
 from database import db
-from models import Sheet, Department, Examtype, Subject, get_or_create
+from models import Sheet, Department, Examtype, Subject, Circulation, get_or_create
 
 AFTER_GRADUATE_EXAMS = 'after-graduate-exams'
 TRANSFER_EXAMS = 'transfer-exams'
@@ -26,25 +26,32 @@ def get_circulation_links():
     ]
 
 
-def crawl_top_circulations(query):
+def crawl_top_circulations(type, query):
     results = dict()
     for content in get_pages(query):
         table = build_soup(content).find('table', 'listview')
         books = list()
+        year_tag = table.get('summary')
+        year, tag = re.findall('(\d+)年(\S+)',year_tag)[0]
         for row in table.find_all('tr')[1:]:
             try:
                 rk, title, ref, cnt = row.findChildren()
             except ValueError:
                 # for year 2003, there's no <a> tag
-                rk, title, cnt, ref = row.findChildren(), None
-            books.append({
-                'rank': rk.text,
-                'book_name': title.text.strip(' /'),
-                'link': ref.get('href') if ref else None,
-                'circulations': cnt.text
-            })
-        results[table.get('summary')] = books
-    return results
+                rk, title, cnt = row.findChildren()
+                ref = None
+
+            circulaion = Circulation(
+                type=type,
+                bookname=title.text.strip(' /'),
+                url=ref.get('href') if ref else None,
+                rank=rk.text,
+                tag=tag,
+                year=year,
+                count=cnt.text
+            )
+            db.session.add(circulaion)
+    db.session.commit()
 
 
 def crawl_lost_objects(data):

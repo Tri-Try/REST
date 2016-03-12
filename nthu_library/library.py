@@ -51,7 +51,7 @@ class NTHULibrary(object):
             if not year or str(year) in a.get('text')
             if a.get('href').startswith(q_type)
         ]
-        return crawl_top_circulations(query)
+        return crawl_top_circulations(type, query)
 
     def get_info(self):
         return self.user.get_info()

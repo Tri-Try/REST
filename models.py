@@ -9,6 +9,26 @@ def get_or_create(model, val):
     return m
 
 
+class Circulation(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    type = db.Column(db.String)
+    bookname = db.Column(db.String)
+    url = db.Column(db.String)
+    tag = db.Column(db.String)
+    year = db.Column(db.Integer)
+    rank = db.Column(db.Integer)
+    count = db.Column(db.Integer)
+
+    def __init__(self, type, bookname, url, year, tag, rank, count):
+        self.type = type
+        self.bookname = bookname
+        self.url = url
+        self.tag = tag
+        self.year = year
+        self.rank = rank
+        self.count = count
+
+
 class Sheet(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     year = db.Column(db.Integer)
