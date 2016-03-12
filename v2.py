@@ -16,9 +16,9 @@ api_v2 = restful.Api(api_v2_bp)
 resource_fields = {
     'year': fields.Integer,
     'url': fields.String,
-    'department': fields.String,
+    'department': fields.String(default='無'),
     'subject': fields.String,
-    'examtype': fields.String
+    'type': fields.String(attribute='examtype')
 }
 
 
