@@ -57,3 +57,13 @@ class Library(Resource):
 
 
 api_v1.add_resource(Library, '/<string:service_id>')
+
+docs = {
+    'routes': [
+        {'key': '失物招領', 'url': '/api/v1/lost'},
+        {'key': '新進圖書資料', 'url': '/api/v1/new'},
+        {'key': '考古題', 'url': '/api/v1/questions'},
+        {'key': '空間借閱系統', 'url': '/api/v1/space'},
+        {'key': '借閱排行榜', 'url': '/api/v1/top'},
+    ]
+}

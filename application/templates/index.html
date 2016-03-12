@@ -7,7 +7,8 @@
   <body>
     <div class="row">
       <div class="col-md-12 jumbotron">
-        <h1 class="text-center">Open Campus API</h1>
+        <h1 class="text-center">Open Campus:</h1>
+        <h2 class="text-center">Open data API</h2>
       </div>
     </div>
     <div class="row">
@@ -26,28 +27,14 @@
               </tr>
             </thead>
             <tbody>
+              {% for e in v1_docs.routes %}
               <tr>
-                <th>失物招領</th>
-                <th><a href="/api/v1/lost">/api/v1/lost</a></th>
+                <th>{{ e.key }}</th>
+                <th><a href="{{ e.url }}">{{ e.url }}</a></th>
               </tr>
-              <tr>
-                <th>新進圖書資料</th>
-                <th><a href="/api/v1/new">/api/v1/new</a></th>
-              </tr>
-              <tr>
-                <th>考古題</th>
-                <th><a href="/api/v1/questions">/api/v1/questions</a></th>
-              </tr>
-              <tr>
-                <th>空間借閱系統</th>
-                <th><a href="/api/v1/space">/api/v1/space</a></th>
-              </tr>
-              <tr>
-                <th>借閱排行榜</th>
-                <th><a href="/api/v1/top">/api/v1/top</a></th>
-              </tr>
-          </tbody>
-        </table>
+              {% endfor %}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

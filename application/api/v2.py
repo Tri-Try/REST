@@ -1,5 +1,3 @@
-import json
-
 from flask import Blueprint
 from flask.ext import restful
 from flask.ext.restful import abort, fields, marshal_with, reqparse

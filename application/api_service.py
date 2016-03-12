@@ -9,7 +9,6 @@ from application.models import db
 
 def create_app():
     app = Flask(__name__)
-    app.config['DEBUG'] = True
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../sqlite3.db'
     db.init_app(app)
 
