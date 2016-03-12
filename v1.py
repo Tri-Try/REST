@@ -11,7 +11,7 @@ API_VERSION_V1 = 'v1'
 
 api_v1 = Api(api_v1_bp)
 
-library_files = ['new', 'top']
+library_files = ['top']
 
 
 def init_load(name):
@@ -27,6 +27,7 @@ library_resources = {
 route_func = {
     'space': NTHULibrary.get_available_space,
     'lost': NTHULibrary.get_lost,
+    'new': NTHULibrary.get_newest_books,
 }
 
 
@@ -41,7 +42,7 @@ resource_fields = {
 
 def clean_param(params):
     # TODO
-    return params
+    return params.to_dict()
 
 
 def make_job(service_id, param):
@@ -63,7 +64,7 @@ def abort_if_doesnt_exist(service_id):
 class Library(Resource):
 
     def get(self, service_id):
-        if service_id in ['space', 'lost']:
+        if service_id in ['space', 'lost', 'new']:
             return make_job(service_id, request.args)
         if service_id in ['questions']:
             return query_from_db(service_id)

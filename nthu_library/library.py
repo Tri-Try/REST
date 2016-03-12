@@ -25,7 +25,8 @@ class NTHULibrary(object):
         }
         return crawl_lost_objects(data)
 
-    def get_newest_books(self, lang=None):
+    @staticmethod
+    def get_newest_books(lang=None):
         """
         fetch recent newest books from official RSS
         :param lang: default is `None` to get both languages,
