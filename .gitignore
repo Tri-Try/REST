@@ -11,6 +11,7 @@ sqlite3.db
 # Distribution / packaging
 .Python
 env/
+.env/
 build/
 develop-eggs/
 dist/
