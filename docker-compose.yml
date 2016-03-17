@@ -1,20 +1,20 @@
-web:
-  restart: always
-  build: .
-  volumes:
-    - .:/code/
-  expose:
+version: '2'
+services:
+  web:
+    build: .
+    volumes:
+      - .:/code/
+    expose:
       - "5000"
-  command: gunicorn -w 4 -b :8000 api_service:app
+    command: gunicorn -w 4 -b :8000 app:app
 
-nginx:
-  restart: always
-  build: ./nginx/
-  ports:
-    - "80:80"
-  volumes:
-    - /www/static
-  volumes_from:
-    - web
-  links:
-    - web:web
+  nginx:
+    build: ./nginx/
+    ports:
+      - "80:80"
+    volumes:
+      - /www/static
+    volumes_from:
+        - web
+    links:
+        - web:web""

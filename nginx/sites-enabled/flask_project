@@ -2,6 +2,7 @@ server {
 
     listen 80;
     server_name 140.114.71.110;
+    access_log /var/log/nginx/rest_api.log;
     charset utf-8;
 
     gzip on;
