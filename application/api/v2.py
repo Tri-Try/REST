@@ -33,7 +33,7 @@ class SheetResource(restful.Resource):
         @apiGroup Sheet
         @apiDescription Query for sheets by year, department and examtype.
 
-        @apiSampleRequest https://flaskapi-weering.c9users.io/api/v2/sheets
+        @apiSampleRequest /api/v2/sheets
 
         @apiParam {Number} [year]         Specify year.
         @apiParam {String} [department]   Specify department.

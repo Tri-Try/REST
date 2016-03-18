@@ -9,7 +9,7 @@ define({ "api": [
     "description": "<p>Query for sheets by year, department and examtype.</p>",
     "sampleRequest": [
       {
-        "url": "https://flaskapi-weering.c9users.io/api/v2/sheets"
+        "url": "http://192.168.55.66/api/v2/sheets"
       }
     ],
     "parameter": {
@@ -121,8 +121,8 @@ define({ "api": [
     "url": "",
     "version": "0.0.0",
     "filename": "application/static/doc/main.js",
-    "group": "_home_ubuntu_workspace_application_static_doc_main_js",
-    "groupTitle": "_home_ubuntu_workspace_application_static_doc_main_js",
+    "group": "_code_application_static_doc_main_js",
+    "groupTitle": "_code_application_static_doc_main_js",
     "name": ""
   }
 ] });
