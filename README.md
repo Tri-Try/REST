@@ -1,22 +1,45 @@
 # Open Campus API
-**A demo version.**
 
 # Reqirements:
-  - Python 3+
+  - Python 3.4+
   - npm
 
 # Build:
-  - npm install apidoc -g
-  - apidoc --input application/ --output application/static/doc/
-  - python manage.py crawl
+- Local machine:
 
-# Usage:
-- Local test:
-  1. pip install -r requirements.txt
-  2. python api-service.py
-  3. Open `http://127.0.0.1:5000`
+  First, you need to install dependencies and crawling the data.
+
+  ```bash
+  # Install dependencies
+  npm install apidoc -g
+  pip install -r requirements.txt
+
+  python manage.py syncdb
+  python manage.py crawl
+
+  # generate static documents
+  apidoc --input application/ --output application/static/doc/
+
+  # Run server
+  python manage.py runserver
+  ```
+  
+  Open `http://127.0.0.1:5000` in your browser!
 
 - Docker build:
-  1. docker-compose build
-  2. docker-compose up `options: -d`
-  3. Open `http://YOUR_MACHINE_IP`
+  ```bash
+  # Build all depencies in docker environment.
+  docker-compose build
+
+  # Start a running container
+  docker-compose up -d
+
+  docker-compose run web python manage.py syncdb
+  docker-compose run web python manage.py crawl
+
+  # generate static documents
+  docker-compose run web apidoc --input application/ --output application/static/doc/
+  ```
+
+  In docker build, doesn't need to specify port number, `nginx` will make it.
+  Just open `http://${DOCKER_CONTAINER_IP}` in browser.
