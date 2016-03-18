@@ -11,6 +11,8 @@ api_v2_bp = Blueprint('api_v2', __name__)
 api_v2 = restful.Api(api_v2_bp)
 
 
+
+
 resource_fields = {
     'year': fields.Integer,
     'url': fields.String,
@@ -24,6 +26,42 @@ class SheetResource(restful.Resource):
 
     @marshal_with(resource_fields, envelope='result')
     def get(self):
+        """
+        @api {get} /sheets/ Request sheets information
+        @apiVersion 2.0.0
+        @apiName get_sheet
+        @apiGroup Sheet
+        @apiDescription Query for sheets by year, department and examtype.
+
+        @apiSampleRequest https://flaskapi-weering.c9users.io/api/v2/sheets
+
+        @apiParam {Number} [year]         Specify year.
+        @apiParam {String} [department]   Specify department.
+        @apiParam {String} [examtype]     Specify examtype.
+
+        @apiSuccess {Number} id         Sheet's ID.
+        @apiSuccess {Number} year       Year.
+        @apiSuccess {String} department Department.
+        @apiSuccess {String} subject    Subject.
+        @apiSuccess {String} examtype   Exam type.
+
+        @apiParamExample {json} Request-Example:
+                 { "year": 102, "department": "物理系" }
+        @apiSuccessExample {json} Success-Response:
+                 HTTP/1.1 200 OK
+                 {
+                    "result": [
+                    {
+                        "department": "'物理系'",
+                        "subject": "'近代物理'",
+                        "type": "'after-graduate-exams'",
+                        "url": "http://www.lib.nthu.edu.tw/library/department/ref/exam/p/phys/101/2003.pdf",
+                        "year": 101
+                    },
+                    ...
+                    ]
+                 }
+        """
         parser = reqparse.RequestParser()
         parser.add_argument('year', type=int)
         parser.add_argument('department')
