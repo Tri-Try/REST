@@ -1,8 +1,16 @@
 # Open Campus API
-**A simple demo version.**
+**A demo version.**
+
+# Reqirements:
+  - Python 3+
+  - npm
+
+# Build:
+  - npm install apidoc -g
+  - apidoc --input application/ --output application/static/doc/
+  - python manage.py crawl
 
 # Usage:
-Dont't forget to get json data from [NTHU-Library](https://github.com/Tri-Try/NTHU-Library) scripts. And put them under current project's folder.
 - Local test:
   1. pip install -r requirements.txt
   2. python api-service.py
