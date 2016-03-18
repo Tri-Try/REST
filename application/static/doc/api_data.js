@@ -9,7 +9,7 @@ define({ "api": [
     "description": "<p>Query for sheets by year, department and examtype.</p>",
     "sampleRequest": [
       {
-        "url": "http://192.168.55.66/api/v2/sheets"
+        "url": "http://tritry.cs.nthu.edu.tw/api/v2/sheets"
       }
     ],
     "parameter": {
