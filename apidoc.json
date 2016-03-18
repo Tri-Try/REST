@@ -3,6 +3,6 @@
     "version": "2.0.0",
     "description": "This is an API system provided by Tritry@github",
     "title": "Open Campus - Open Data REST API",
-    "url" : "http://192.168.55.66/api/v2",
-    "sampleUrl": "http://192.168.55.66"
+    "url" : "http://tritry.cs.nthu.edu.tw/api/v2",
+    "sampleUrl": "http://tritry.cs.nthu.edu.tw"
 }
