@@ -31,3 +31,6 @@ class TestApp:
     def test_api_v2(self, client):
         self._check_json(client.get('/api/v2/sheets'))
         self._check_json(client.get('/api/v2/topbooks'))
+
+    def test_doc(self, client):
+        assert client.get('/doc').status_code == 200
