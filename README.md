@@ -18,7 +18,7 @@
   python manage.py crawl
 
   # generate static documents
-  apidoc --input application/ --output application/static/doc/
+  make apidoc
 
   # Run server
   python manage.py runserver
@@ -38,7 +38,7 @@
   docker-compose run web python manage.py crawl
 
   # generate static documents
-  docker-compose run web apidoc --input application/ --output application/static/doc/
+  docker-compose run web make apidoc
   ```
 
   In docker build, doesn't need to specify port number, `nginx` will make it.
