@@ -1,4 +1,4 @@
-from flask.ext.script import Command, Manager
+from flask.ext.script import Manager
 
 from application.api_service import create_app
 from application.models import db
@@ -8,6 +8,12 @@ from nthu_library import NTHULibrary
 
 app = create_app()
 manager = Manager(app)
+
+
+@manager.command
+def debug():
+    app.config['ERROR_404_HELP'] = False
+    app.run(debug=True)
 
 
 @manager.command
