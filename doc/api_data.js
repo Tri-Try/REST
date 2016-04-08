@@ -22,7 +22,7 @@ define({ "api": [
     "type": "",
     "url": "",
     "version": "0.0.0",
-    "filename": "application/static/doc/main.js",
+    "filename": "./application/static/doc/main.js",
     "group": "D__workspace_api_service_application_static_doc_main_js",
     "groupTitle": "D__workspace_api_service_application_static_doc_main_js",
     "name": ""
@@ -119,7 +119,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "application/api/v2.py",
+    "filename": "./application/api/v2.py",
     "groupTitle": "ExamPaper"
   },
   {
@@ -234,7 +234,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "application/api/v2.py",
+    "filename": "./application/api/v2.py",
     "groupTitle": "ExamPaper"
   },
   {
@@ -310,7 +310,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "application/api/v1.py",
+    "filename": "./application/api/v1.py",
     "groupTitle": "ExamPaper"
   },
   {
@@ -347,7 +347,7 @@ define({ "api": [
         "url": "http://tritry.cs.nthu.edu.tw/api/v1/lost"
       }
     ],
-    "filename": "application/api/v1.py",
+    "filename": "./application/api/v1.py",
     "groupTitle": "LibraryLost"
   },
   {
@@ -432,7 +432,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "application/api/v1.py",
+    "filename": "./application/api/v1.py",
     "groupTitle": "LibraryLost"
   },
   {
@@ -469,7 +469,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "application/api/v1.py",
+    "filename": "./application/api/v1.py",
     "groupTitle": "LibraryRoom"
   },
   {
@@ -559,7 +559,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "application/api/v2.py",
+    "filename": "./application/api/v2.py",
     "groupTitle": "Librarybooks"
   },
   {
@@ -613,7 +613,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "application/api/v1.py",
+    "filename": "./application/api/v1.py",
     "groupTitle": "Librarybooks"
   },
   {
@@ -764,7 +764,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "application/api/v2.py",
+    "filename": "./application/api/v2.py",
     "groupTitle": "Librarybooks"
   },
   {
@@ -801,7 +801,7 @@ define({ "api": [
         }
       ]
     },
-    "filename": "application/api/v1.py",
+    "filename": "./application/api/v1.py",
     "groupTitle": "Librarybooks"
   }
 ] });

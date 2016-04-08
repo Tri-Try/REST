@@ -16,4 +16,3 @@ def doc_service(path):
     if path == 'doc':
         path = 'index.html'
     return send_file('static/doc/%s' % path)
-
