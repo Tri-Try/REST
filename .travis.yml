@@ -10,5 +10,9 @@ install:
   - pip install -r requirements.txt
   - pip install pytest-flask
 
+before_script:
+  - python manage.py syncdb
+  - make apidoc
+
 script:
   - py.test
