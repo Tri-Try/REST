@@ -1,5 +1,5 @@
 # Open Campus API
-
+[![Build Status](https://travis-ci.org/Tri-Try/REST.svg?branch=master)](https://travis-ci.org/Tri-Try/REST)
 # Reqirements:
   - Python 3.4+
   - npm
