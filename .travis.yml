@@ -1,18 +1,32 @@
-language: python
+sudo: required
 
-python:
-  - "3.4"
-  - "3.5"
+services:
+  - docker
+
+env:
+  - DOCKER_VERSION: 1.10.3
+  - DOCKER_COMPOSE_VERSION: 1.6.2
+
+before_install:
+  # list docker-engine versions
+  - apt-cache madison docker-engine
+
+  # upgrade docker-engine to specific version
+  - sudo apt-get -o Dpkg::Options::="--force-confnew" install -y docker-engine=${DOCKER_VERSION}
+
+  # reinstall docker-compose at specific version
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
 
 install:
-  - npm install -g apidoc
-  - pip install -U pip
-  - pip install -r requirements.txt
-  - pip install pytest-flask
+  - docker-compose ps
+  - docker exec rest_web_1 pip install pytest-flask
 
 before_script:
-  - python manage.py syncdb
-  - make apidoc
+  - docker exec rest_web_1 python manage.py syncdb
+  - docker exec rest_web_1 make apidoc
 
 script:
-  - py.test
+  - docker exec rest_web_1 py.test
