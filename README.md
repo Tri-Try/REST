@@ -1,5 +1,6 @@
 # Open Campus API
 [![Build Status](https://travis-ci.org/Tri-Try/REST.svg?branch=master)](https://travis-ci.org/Tri-Try/REST)
+[ ![Codeship Status for Tri-Try/REST](https://codeship.com/projects/5cf75790-dfdc-0133-639f-0e99657653d8/status?branch=master)](https://codeship.com/projects/145102)
 # Reqirements:
   - Python 3.4+
   - npm
@@ -23,7 +24,7 @@
   # Run server
   python manage.py runserver
   ```
-  
+
   Open `http://127.0.0.1:5000` in your browser!
 
 - Docker build:
