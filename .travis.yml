@@ -6,7 +6,7 @@ services:
 env:
   - DOCKER_VERSION=1.10.3-0~trusty DOCKER_COMPOSE_VERSION=1.6.2
 
-before_install:
+install:
   # list docker-engine versions
   - apt-cache madison docker-engine
 
@@ -19,11 +19,11 @@ before_install:
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
 
-install:
+before_script:
+  - docker-compose build
+  - docker-compose up -d
   - docker-compose ps
   - docker exec rest_web_1 pip install pytest-flask
-
-before_script:
   - docker exec rest_web_1 python manage.py syncdb
   - docker exec rest_web_1 make apidoc
 
